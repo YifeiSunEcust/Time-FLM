@@ -1,0 +1,35 @@
+# Time-FLM Configuration File
+# This file contains hyperparameters and settings for Time-FLM model training and evaluation
+
+# Basic config
+model: FLM
+data: FLM
+root_path: './datasets/FLM_datasets'  # Update to your data path
+freq: h
+features: M
+use_dynamic_batch: true
+total_range: [8, 64]
+num_workers: 8
+
+# Model define
+e_layers: 4
+max_len: 100
+num_patch: 40
+d_model: 128
+n_heads: 8
+d_ff: 128
+expert_nums: 6
+top_k: 2
+dropout: 0.1
+output_attention: false
+activation: gelu
+factor: 1
+embed: timeF
+
+# Optimization
+batch_size: 256
+train_epochs: 32
+learning_rate: 0.0001
+
+# Random seed for reproducibility
+seed: 2026

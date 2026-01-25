@@ -10,6 +10,7 @@ import argparse
 import os
 import random
 import numpy as np
+import yaml
 
 from train import train_model
 from validate import evaluate_model
@@ -56,10 +57,24 @@ parser.add_argument('--train_epochs', type=int, default=32, help='train epochs')
 parser.add_argument('--learning_rate', type=float, default=0.0001, help='optimizer learning rate')
 args = parser.parse_args()
 
+# Load configuration from YAML file
+config_path = 'config.yaml'
+if os.path.exists(config_path):
+    with open(config_path, 'r') as f:
+        config = yaml.safe_load(f)
+    # Update args with config values
+    for key, value in config.items():
+        if hasattr(args, key):
+            setattr(args, key, value)
+        else:
+            print(f"Warning: {key} not found in args, skipping")
+else:
+    print(f"Warning: {config_path} not found, using default args")
+
 
 if __name__ == "__main__":
 
-    seed = random.randint(0, 10000)
+    seed = args.seed
     random.seed(seed)
     torch.manual_seed(seed)
     np.random.seed(seed)

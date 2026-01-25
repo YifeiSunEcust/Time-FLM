@@ -1,0 +1,50 @@
+# Baseline Models Configuration File
+# This file contains hyperparameters and settings for baseline models
+
+# Basic config
+model: TiDE
+task_name: long_term_forecast
+data: EFP_each
+root_path: './datasets/PatchTST_datasets'  # Update to your data path
+data_path: EFP_long.csv
+freq: h
+features: MS
+
+# Model define
+enc_in: 1
+dec_in: 1
+c_out: 1
+e_layers: 2
+d_layers: 1
+d_model: 32
+n_heads: 4
+d_ff: 128
+top_k: 5
+num_kernels: 6
+dropout: 0.1
+output_attention: false
+activation: gelu
+
+# Additional parameters (add more as needed)
+factor: 1
+embed: timeF
+distil: true
+mix: true
+padding: 0
+freq: h
+patch_len: 16
+stride: 8
+prompt_domain: true
+content: ''
+llm_model: GPT2
+llm_dim: 768
+llm_layers: 6
+pct_start: 0.3
+
+# Optimization
+batch_size: 32
+learning_rate: 0.0001
+train_epochs: 10
+
+# Random seed for reproducibility
+seed: 2026
